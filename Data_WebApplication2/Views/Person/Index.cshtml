@@ -1,0 +1,52 @@
+﻿@model List<Person>
+
+@{
+    ViewBag.Title = "Persons";
+}
+
+<h3>Persons</h3>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-success">@TempData["Message"]</div>
+}
+
+<table id="tblPersons" class="table" style="width:100%;" cellspacing="0">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Phone
+            </th>
+            <th>
+                City
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    @foreach (var person in Model)
+    {
+        <tr>
+            <td width="25%">
+                @person.Name
+            </td>
+            <td width="25%">
+                @person.PhoneNumber
+            </td>
+            <td width="25%">
+                @person.City
+            </td>
+            <td width="15%">
+                @Html.ActionLink("Edit", "Edit", "Person", new { id = person.Id }) |
+                @Html.ActionLink("Delete", "Delete", "Person", new { id = person.Id })
+            </td>
+
+        </tr>
+    }
+</table>
+<div>
+    <a asp-action="Create" asp-controller="Person" class="btn btn-primary">Add Person</a>
+</div>
+

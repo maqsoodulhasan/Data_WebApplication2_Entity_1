@@ -1,0 +1,41 @@
+﻿@using Data_WebApplication2.ViewModels;
+@model CreatePersonViewModel
+
+@{
+    ViewBag.Title = "Persons";
+}
+
+<h3>Add Person</h3>
+
+<form asp-action="Create" asp-controller="Person" method="post">
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <div class="form-group row">
+        <div class="col-md-2 text-right">
+            @Html.LabelFor(m => m.Name, new { @class = "col-form-label" })
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", autofocus = "autofocus" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-2 text-right">
+            @Html.LabelFor(m => m.PhoneNumber, new { @class = "col-form-label" })
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.PhoneNumber, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-md-2 text-right">
+            @Html.LabelFor(m => m.City, new { @class = "col-form-label" })
+        </div>
+        <div class="col-md-6">
+            @Html.TextBoxFor(m => m.City, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="offset-md-2 col-md-6" style="padding-left: 5px;">
+        <button type="submit" class="btn btn-success">Create</button>
+        <a asp-action="Index" asp-controller="Person" class="btn btn-secondary">Back</a>
+    </div>
+</form>
+

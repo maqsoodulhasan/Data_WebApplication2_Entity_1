@@ -1,0 +1,75 @@
+﻿@model Data_WebApplication2.ViewModels.PersonDetailViewModel
+@using Data_WebApplication2.ViewModels;
+@{
+    ViewData["Title"] = "Home Page";
+}
+<link rel="stylesheet" href="~/css/site.css" type="text/css" />
+
+@if (ViewBag.Message != null)
+{
+    <p>@ViewBag.Message</p>
+}
+
+<p> Index page from home controller to show list of people</p>
+
+
+<form asp-controller="Home" asp-action="Index" method="post">
+
+    @Html.Label("Search: ")
+    <input type="text" maxlength="20" name="query">
+    <br>
+
+    <p></p>
+
+</form>
+<form asp-controller="Home" asp-action="AddPerson" method="post">
+
+    @Html.Label("Enter Name: ")
+    <input type="text" maxlength="20" asp-for="CreatePersonViewModel.Name">
+    <br>
+    @Html.Label("Enter Phone: ")
+    <input type="text" maxlength="20" asp-for="CreatePersonViewModel.PhoneNumber">
+    <br>
+    @Html.Label("Enter City: ")
+    <input type="text" maxlength="20" asp-for="CreatePersonViewModel.City">
+    <br>
+    <input type="submit" value="Add Person" id="AddPerson" />
+
+
+</form>
+<h4>List of People (total persons in list are @Model.PeopleViewModel.Count)</h4>
+<table class="table">
+    <tr>
+        @*<th>ID</th>*@
+        <th>Name</th>
+        <th>PhoneNumber</th>
+        <th>City</th>
+        <th>Operation</th>
+    </tr>
+    @foreach (var people in Model.PeopleViewModel)
+    {
+        <tr>
+            @*<td>    @people.Id</td>*@
+            <td>    @people.Name</td>
+            <td>    @people.PhoneNumber</td>
+            <td>    @people.City</td>
+            <td>
+                @Html.ActionLink("Delete","Delete","Home", new{id=@people.Id})
+
+            </td>
+            @*  <td> <input type="submit" value="Delete" id = "DeletePerson"/></td>*@
+        </tr>
+    }
+
+</table>
+
+<form asp-controller="Home" asp-action="Sort" method="post">
+
+    
+    <input type="submit" value="Sort List" id="Sort" />
+
+
+</form>
+
+
+
